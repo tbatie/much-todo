@@ -1,0 +1,14 @@
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.application {
+  margin: 0px auto;
+  max-width: 800px;
+}
