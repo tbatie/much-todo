@@ -11,8 +11,24 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        test: /\.(hbs|handlebars)$/,
+        use: {
+          loader: "handlebars-loader"
+        }
+      },
+      {
+        test: /\.(css|less)$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { sourceMap: true }
+          },
+          {
+            loader: "less-loader",
+            options: { sourceMap: true }
+          }
+        ]
       }
     ]
   },

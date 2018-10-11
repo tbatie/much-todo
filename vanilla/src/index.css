@@ -2,13 +2,15 @@ html,
 body {
   padding: 0px;
   margin: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 * {
   box-sizing: border-box;
 }
 
-.application {
+#application {
   margin: 0px auto;
   max-width: 800px;
 }
