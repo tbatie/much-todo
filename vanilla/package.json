@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open --env.NODE_ENV=local"
+    "start": "webpack-dev-server --open --mode=development"
   },
   "devDependencies": {
     "babel-polyfill": "6.26.0",
