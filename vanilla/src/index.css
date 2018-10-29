@@ -1,16 +1,76 @@
-html,
-body {
-  padding: 0px;
-  margin: 0px;
+.header {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.header_title {
+  text-align: center;
+  flex-grow: 2;
+  color: #78b5ce;
+  align-self: center;
+}
+
+.header_remaining_count {
+  align-self: flex-end;
+  margin-bottom: 22px;
+}
+
+.body {
+  flex-flow: column wrap;
+  display: flex;
+  justify-content: center;
+}
+
+.newtodo {
+  display: flex;
   width: 100%;
-  height: 100%;
+  justify-content: center;
 }
 
-* {
-  box-sizing: border-box;
+.newtodo_input {
+  flex-basis: 400px;
 }
 
-#application {
-  margin: 0px auto;
-  max-width: 800px;
+.newtodo_filter {
+  margin-left: 20px;
+}
+
+.todo_list {
+  width: 100%;
+  padding-top: 25px;
+  flex-flow: column wrap;
+}
+
+.todo_list_row {
+  display: flex;
+  justify-content: center;
+}
+
+.todo_row_padding {
+  flex-grow: 1
+}
+
+.todo_row_content {
+  flex-basis: 545px;
+}
+
+.btn_box {
+  padding-top: 20px;
+  padding-right: 130px
+  /* display: flex;
+  justify-content: center;
+  flex-wrap: wrap; */
+}
+
+.btn_row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  flex-basis: 125px;
+  margin: 2px;
 }

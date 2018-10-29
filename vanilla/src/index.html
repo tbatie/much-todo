@@ -9,57 +9,91 @@
 </head>
 
 <body>
-    <div id="application">
-        <h1>
-            Make an application with the following requirements:
-        </h1>
-        <ul>
-            <li>
-                Maintain a list of todos
-            </li>
-            <li>
-                Todos consist of plain text
-            </li>
-            <li>
-                Allow users to add new todos to the list
-            </li>
-            <li>
-                Allow users to mark / unmark todos as complete
-            </li>
-            <li>
-                The list should be sorted in most recently created order, like a stack.
-            </li>
-            <li>
-                Allow users to mark / unmark all todos as complete in one action
-            </li>
-            <li>
-                Provide the ability to filter the list by completed or uncompleted
-            </li>
-            <li>
-                Implement routing that allows the user to go to those filters.
-            </li>
-            <li>
-                Allow users to delete todos
-            </li>
-            <li>
-                Indicate somewhere how many todos are uncompleted
-            </li>
-            <li>
-                Allow users to edit the text of an existing todo
-            </li>
-        </ul>
-        <h1>
-            Go to the src directory and start editing index.html / index.js to get started.
-        </h1>
-        <h1 class="docs">
-            Check out the following sites for help:
-            <div><a href="https://www.w3schools.com/" target="_blank">w3schools</a></div>
-            <div><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference" target="_blank">MDN Web
-                    Docs</a></div>
-            <div><a href="https://css-tricks.com/" target="_blank">CSS Tricks</a></div>
-            <div><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">Guide to Flexbox</a></div>
-        </h1>
+    <div id="app">
+        <div class="header">
+            <h3 class="header_title">Todo List App!</h3>
+            <div class="header_remaining_count" id="remainingTodoCount"></div>
+        </div>
+        <div class="body">
+            <div class="newtodo">
+                <input class="newtodo_input" id="newTodoName" type="text" onkeyup="onAddTodo(event)">
+                <select class="newtodo_filter" id="filterSelect" onchange="onFilterTodos()">
+                    <option value="all">All</option>
+                    <option value="completed">Completed</option>
+                    <option value="remaining">Remaining</option>
+                </select>
+            </div>
+            <div class="todo_list" id="todoList">
+            </div>
+            <div class="btn_box">
+                <div class="btn_row">
+                    <input id="selectAllBtn" class="btn" type="button" value="Select All" onclick="onSelectAll()">
+                    <input id="removeBtn" class="btn" type="button" value="Remove Selected" onclick="onRemoveSelected()">
+                </div>
+                <div class="btn_row">
+                    <input id="markCompleteBtn" class="btn" type="button" value="Mark Complete" onclick="onMarkComplete()">
+                    <input id="markIncompleteBtn" class="btn" type="button" value="Mark Incomplete" onclick="onMarkIncomplete()">
+                </div>
+            </div>
+        </div>
+
     </div>
+
+
+
+    <!-- <div id="application">
+    <h1>
+        Make an application with the following requirements:
+    </h1>
+    <ul>
+        <strike>
+            Maintain a list of todos
+        </strikg>
+        <strike>
+            Todos consist of plain text
+        </strike>
+        <strike>
+            Allow users to add new todos to the list
+        </strike>
+        <strike>
+            Allow users to mark / unmark todos as complete
+        </strike>
+        <strike>
+            The list should be sorted in most recently created order, like a stack.
+        </strike>
+        <strike>
+            Allow users to mark / unmark all todos as complete in one action
+        </strike>
+        <strike>
+            Provide the ability to filter the list by completed or uncompleted
+        </strike>
+        <strike>
+            Implement routing that allows the user to go to those filters.
+        </strike>
+        <strike>
+            Allow users to delete todos
+        </strike>
+        <strike>
+            Indicate somewhere how many todos are uncompleted
+        </strike>
+        <strike>
+            Allow users to edit the text of an existing todo
+        </strike>
+    </ul>
+    <h1>
+        Go to the src directory and start editing index.html / index.js to get started.
+    </h1>
+    <h1 class="docs">
+        Check out the following sites for help:
+        <div><a href="https://www.w3schools.com/" target="_blank">w3schools</a></div>
+        <div><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference" target="_blank">MDN Web
+                Docs</a></div>
+        <div><a href="https://css-tricks.com/" target="_blank">CSS Tricks</a></div>
+        <div><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">Guide to Flexbox</a></div>
+    </h1>
+</div> -->
+    </div>
+
 </body>
 
 </html>
