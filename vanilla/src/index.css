@@ -21,6 +21,7 @@
   flex-flow: column wrap;
   display: flex;
   justify-content: center;
+  padding-bottom: 100px;
 }
 
 .newtodo {
@@ -54,6 +55,12 @@
 
 .todo_row_content {
   flex-basis: 545px;
+}
+
+.todo_label {
+  max-width: 140px; 
+  word-wrap: normal; 
+  word-break: break-all;
 }
 
 .btn_box {

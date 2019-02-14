@@ -8,17 +8,25 @@ const routes = {
     '/': function () {
         saveTodoFilter(FILTER_ALL)
     },
-    '/remaining': function () {
+    '#/remaining': function () {
         saveTodoFilter(FILTER_REMAINING)
     },
-    '/completed': function () {
+    '#/completed': function () {
         saveTodoFilter(FILTER_COMPLETED)
     }
 }
 
 window.addEventListener('DOMContentLoaded', function () {
     refreshAppState()
-    routes[window.location.pathname]()
+    var route = routes[window.location.hash]
+    if(route === undefined) {
+        route = routes[window.location.pathname]
+    }
+
+    if(route === undefined) {
+        route = routes['/']
+    }
+    route()
 })
 
 const createUid = () => {
@@ -81,8 +89,36 @@ const saveTodos = (todos) => {
     saveAppState(newAppState)
 }
 
+const editTodos = (todos) => {
+    var newTodos = getAppState().todos.reduce((map, todo) => {
+        map[todo.id] = todo
+        return map
+    }, {})
+
+    todos.forEach(todo => newTodos[todo.id] = todo)
+    
+    var newAppState = getAppState()
+    newAppState.todos = Object.values(newTodos)
+    saveAppState(newAppState)
+}   
+
+const deleteTodos = (todoIds) => {
+    var newTodos = getAppState().todos.reduce((list, todo) => {
+        if(!todoIds.includes(todo.id)) {
+            list.push(todo)
+        }
+
+        return list
+    }, [])
+
+    var newAppState = getAppState()
+    newAppState.todos = newTodos
+    saveAppState(newAppState)
+}
+
 const saveAppState = (appState) => {
     window.localStorage.setItem('appState', JSON.stringify(appState))
+
     console.log('SAVED STATE: \n' + JSON.stringify(appState))
     refreshAppState()
 }
@@ -90,6 +126,14 @@ const saveAppState = (appState) => {
 const saveTodoFilter = (filter) => {
     var appState = getAppState()
     appState.todosFilter = filter
+    if(filter === FILTER_COMPLETED) {
+        window.location.hash = '/' + FILTER_COMPLETED
+    } else if(filter === FILTER_REMAINING) {
+        window.location.hash = '/' + FILTER_REMAINING
+    } else {
+        window.location.hash = '/'
+    }
+
     saveAppState(appState)
 }
 
@@ -182,13 +226,14 @@ const populateTodoList = (todos) => {
                 }
                 return todo
             })
-            saveTodos(newTodos)
+            editTodos(newTodos)
         })
 
         var todoEl = todo.isComplete ? document.createElement("strike") : document.createElement("label")
         todoEl.innerHTML = todo.label
         todoEl.className = 'clickableTodo'
         todoEl.todoId = todo.id
+        todoEl.classList.add("todo_label")
         todoEl.onclick = function onClick() { listenForDoubleClick(this) }
         todoEl.onkeypress = function onKeypress(e) {
             if(e.keyCode === 13 && newTodo) {
@@ -232,12 +277,12 @@ const onSelectAll = () => {
         return el
     })
 
-    saveTodos(newTodos)
+    editTodos(newTodos)
 }
 
 const onRemoveSelected = () => {
-    var newTodos = getAppState().getVisibleTodos().filter(el => !el.isSelected)
-    saveTodos(newTodos)
+    var todoIdsToRemove = getAppState().getVisibleTodos().filter(todo => todo.isSelected).map(todo => todo.id)
+    deleteTodos(todoIdsToRemove)
 }
 
 const onMarkComplete = () => {
@@ -247,7 +292,7 @@ const onMarkComplete = () => {
         }
         return todo 
     })
-    saveTodos(newTodos)
+    editTodos(newTodos)
 }
 
 const onMarkIncomplete = () => {
@@ -257,7 +302,7 @@ const onMarkIncomplete = () => {
         }
         return todo 
     })
-    saveTodos(newTodos)
+    editTodos(newTodos)
 }
 
 const onAddTodo = (e) => {
